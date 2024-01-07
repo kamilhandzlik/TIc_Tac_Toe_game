@@ -1,5 +1,7 @@
 import pygame as pg
+from classes import SquareClass
 pg.init()
+
 
 WHITE = (255, 255, 255)         #lines
 BLACK = (0, 0, 0)               #text
@@ -20,3 +22,28 @@ BG_COLOR = BLUE
 
 def grt_font():
     pg.font.SysFont("Calibri", 20)
+
+#######################################
+#### Importing images #################
+#######################################
+blank_image = pg.image.load('Blank.png')
+x_image = pg.image.load('x.png')
+o_image = pg.display.load('o.png')
+x_wins_image = pg.display.load('X Wins.png')
+o_wins_image = pg.display.load('O Wins.png')
+BG_image = pg.display.load('Background.png')
+tie_image = pg.display.load('Tie Game.png')
+
+background = pg.transform.scale(BG_image, (WIDTH, HEIGHT))      #Tutaj skaluję obraz z tyłu do wielkości wyświetlacza mojej gry
+square_group = pg.sprite.Group()
+squares = []
+ 
+num = 1
+for y in range(1, 4):
+    for x in range(1, 4):
+        sq = SquareClass(x, y, num)
+        square_group.add(sq)
+        squares.append(sq)
+
+        num += 1
+
