@@ -1,7 +1,7 @@
-from .__init__ import *
-from .settings import *
+from utils.__init__ import *
+from utils.settings import *
 
-class SquareClass(pg.sprite.Sprite):
+class SquareClass(pg.sprite.Sprite):          #zmieniłem nazwę klasy ponieważ VScode nie umiał rozróżnić między nią a modulo numpy
     def __init__(self, x_id, y_id, number):
         super().__init__()
         self.width = 120

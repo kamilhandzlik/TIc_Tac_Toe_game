@@ -1,14 +1,15 @@
-from utils.classes import *   # Z jakiegoś powodu from utils import * nie chce mi zadziałać dlatego używam kilku importów bezpośrednio do porządanych plików
+from utils.classes import *
 from utils.settings import *
-from utils.__init__ import *
 
 WIN = pg.display.set_mode((WIDTH, HEIGHT))
-pg.display.set_caption("TIc Tac Toe game")
+pg.display.set_caption("Tic Tac Toe game")
 
 
 
 def Update():
+    WIN.blit(background, WIDTH, HEIGHT)
     pg.display.update()
+
 
 run = True
 clock = pg.time.Clock()
