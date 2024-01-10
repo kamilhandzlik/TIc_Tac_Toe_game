@@ -19,9 +19,24 @@ class Square(pg.sprite.Sprite):
     def update(self):
         self.rect.topleft = (self.x, self.y)
 
+    def clicked(self, x_value, y_value):
+        global turn
+        if self.content == " ":
+            if self.rect.collidepoint(x_value, y_value):
+                self.content = turn
+                board[self.number] = turn
 
-def get_font():
-    return pg.font.SysFont("Calibri", 20)
+                if turn == 'x':
+                    self.image = x_image
+                    self.image = pg.transform.scale(self.image, (self.width, self.height))
+                    turn = 'o'
+
+                else:
+                    self.image = o_image
+                    self.image = pg.transform.scale(self.image, (self.width, self.height))
+                    turn = 'x'
+   
+
 
 #settings
 FPS = 60
@@ -41,10 +56,14 @@ BG_image = pg.image.load('Background.png')
 tie_image = pg.image.load('Tie Game.png')
 background = pg.transform.scale(BG_image, (WIDTH, HEIGHT))
 
+def get_font():
+    return pg.font.SysFont("Calibri", 20)
 #main
 
 square_group = pg.sprite.Group()
 squares = []
+turn = "x"
+board = [' ' for i in range(10)]
 
 num = 1
 for y in range(1, 4):
@@ -68,6 +87,10 @@ while run:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             run = False
+        if event.type == pg.MOUSEBUTTONDOWN and turn == 'x':
+            mx, my = pg.mouse.get_pos()
+            for s in squares:
+                s.clicked(mx, my)
 
     Update()
 
