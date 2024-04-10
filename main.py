@@ -14,9 +14,8 @@ class Square(pg.sprite.Sprite):
         self.content = ""
         self.number = number
         self.image = blank_image
-        self.image = pg.transform.scale(
-            self.image, (self.width, self.height)
-        )  # Placeholder, you need to assign proper images
+        # Placeholder, you need to assign proper images
+        self.image = pg.transform.scale(self.image, (self.width, self.height))
         self.rect = self.image.get_rect()
 
     def update(self):
@@ -70,7 +69,7 @@ def check_winner(player):
 
 
 def winner(player):
-    global comp_move, move
+    global compmove, move
 
     for i in range(8):
         if (
@@ -78,7 +77,7 @@ def winner(player):
             and board[winning_list[i][1]] == player
             and board[winning_list[i][2]] == ""
         ):
-            comp_move = winning_list[i][2]
+            compmove = winning_list[i][2]
             move = False
             break
 
@@ -87,7 +86,7 @@ def winner(player):
             and board[winning_list[i][1]] == ""
             and board[winning_list[i][2]] == player
         ):
-            comp_move = winning_list[i][1]
+            compmove = winning_list[i][1]
             move = False
 
         elif (
@@ -95,7 +94,7 @@ def winner(player):
             and board[winning_list[i][1]] == player
             and board[winning_list[i][2]] == player
         ):
-            comp_move = winning_list[i][0]
+            compmove = winning_list[i][0]
             move = False
 
 
@@ -172,8 +171,8 @@ pg.display.set_caption("Tic Tac Toe game")
 blank_image = pg.image.load("Blank.png")
 x_image = pg.image.load("x.png")
 o_image = pg.image.load("o.png")
-x_wins_image = pg.image.load("x wins.png")
-o_wins_image = pg.image.load("o wins.png")
+x_wins_image = pg.image.load("X Wins.png")
+# o_wins_image = pg.image.load("O Wins.png")
 BG_image = pg.image.load("background.png")
 tie_image = pg.image.load("tie game.png")
 background = pg.transform.scale(BG_image, (WIDTH, HEIGHT))
