@@ -109,6 +109,9 @@ def comp_move():
         winner("x")
 
     if move:
+        check_danger_pos()
+
+    if move:
         check_center()
 
     if move:
@@ -121,6 +124,46 @@ def comp_move():
         for square in squares:
             if square.number == compmove:
                 square.clicked(square.x, square.y)
+
+
+def check_danger_pos():
+    global move, compmove
+
+    if board == dangerpos1:
+        compmove = 2
+        move = False
+
+    elif board == dangerpos2:
+        compmove = 4
+        move = False
+
+    elif board == dangerpos3:
+        compmove = 1
+        move = False
+
+    elif board == dangerpos4:
+        compmove = 4
+        move = False
+
+    elif board == dangerpos5:
+        compmove = 7
+        move = False
+
+    elif board == dangerpos6:
+        compmove = 9
+        move = False
+
+    elif board == dangerpos7:
+        compmove = 9
+        move = False
+
+    elif board == dangerpos8:
+        compmove = 7
+        move = False
+
+    elif board == dangerpos9:
+        compmove = 9
+        move = False
 
 
 def check_center():
@@ -198,6 +241,17 @@ winning_list = [
 ]
 
 board = ["" for i in range(10)]
+
+dangerpos1 = ["", "x", "", "", "", "o", "", "", "", "x"]
+dangerpos2 = ["", "", "", "x", "", "o", "", "x", "", ""]
+dangerpos3 = ["", "", "", "x", "x", "o", "", "", "", ""]
+dangerpos4 = ["", "x", "", "", "", "o", "x", "", "", ""]
+dangerpos5 = ["", "", "", "", "x", "o", "", "", "", "x"]
+dangerpos6 = ["", "", "", "", "", "o", "x", "x", "", ""]
+dangerpos7 = ["", "", "", "", "", "o", "x", "", "x", ""]
+dangerpos8 = ["", "x", "", "", "", "o", "", "", "x", ""]
+dangerpos9 = ["", "", "", "x", "", "o", "", "", "x", ""]
+
 run = True
 clock = pg.time.Clock()
 num = 1
