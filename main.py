@@ -20,7 +20,7 @@ class Square(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
 
     def update(self):
-        self.rect.topleft = (self.x, self.y)
+        self.rect.center = (self.x, self.y)
 
     def clicked(self, x_value, y_value):
         global turn, won
@@ -51,7 +51,7 @@ class Square(pg.sprite.Sprite):
 
 
 def check_winner(player):
-    global background, won
+    global background, won, startx, starty, endx, endy
 
     for i in range(8):
         if (
@@ -60,10 +60,12 @@ def check_winner(player):
             and board[winning_list[i][2]] == player
         ):
             won = True
+            get_pos(winning_list[i][0], winning_list[i][2])
             break
 
     if won:
         Update()
+        draw_line(startx, starty, endx, endy)
         square_group.empty()
         background = pg.image.load(player.upper() + "Wins.png")
         background = pg.transform.scale(background, (WIDTH, HEIGHT))
@@ -128,7 +130,7 @@ def comp_move():
 
     else:
         Update()
-        time.sleep(0.5)
+        time.sleep(1)
         square_group.empty()
         background = pg.image.load("Tie Game.png")
         background = pg.transform.scale(background, (WIDTH, HEIGHT))
@@ -203,6 +205,25 @@ def check_edge():
             break
 
 
+def get_pos(n1, n2):
+    global startx, starty, endx, endy
+
+    for sqs in squares:
+        if sqs.number == n1:
+            startx = sqs.x
+            starty = sqs.y
+
+        elif sqs.number == n2:
+            endx = sqs.x
+            endy = sqs.y
+
+
+def draw_line(x1, y1, x2, y2):
+    pg.draw.line(WIN, (0, 0, 0), (x1, y1), (x2, y2), 15)
+    pg.display.update()
+    time.sleep(2)
+
+
 def Update():
     WIN.blit(background, (0, 0))
     square_group.draw(WIN)
@@ -259,6 +280,11 @@ dangerpos6 = ["", "", "", "", "", "o", "x", "x", "", ""]
 dangerpos7 = ["", "", "", "", "", "o", "x", "", "x", ""]
 dangerpos8 = ["", "x", "", "", "", "o", "", "", "x", ""]
 dangerpos9 = ["", "", "", "x", "", "o", "", "", "x", ""]
+
+startx = 0
+starty = 0
+endx = 0
+endy = 0
 
 run = True
 clock = pg.time.Clock()
