@@ -1,4 +1,5 @@
 import pygame as pg
+import time
 
 pg.init()
 
@@ -99,7 +100,7 @@ def winner(player):
 
 
 def comp_move():
-    global move
+    global move, background
     move = True
 
     if move:
@@ -124,6 +125,13 @@ def comp_move():
         for square in squares:
             if square.number == compmove:
                 square.clicked(square.x, square.y)
+
+    else:
+        Update()
+        time.sleep(0.5)
+        square_group.empty()
+        background = pg.image.load("Tie Game.png")
+        background = pg.transform.scale(background, (WIDTH, HEIGHT))
 
 
 def check_danger_pos():
